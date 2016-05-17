@@ -1,10 +1,11 @@
 import telepot
 import time
+import requests
 
 BOT_TOKEN = '189752430:AAF45NDGJboBXNzqGozBetr0YLrEWE1avsU'
 bot = telepot.Bot(BOT_TOKEN)
 
-def handle():
+def handle(message):
     content_type, chat_type, chat_id = telepot.glance(message)
 
     if content_type == 'text' and message['text'] == '/datos':
