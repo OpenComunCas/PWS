@@ -1,5 +1,4 @@
 class ICommand(object):
-
     def can_handle(self,message):
         return message['text'].startswith(self.command)
 
