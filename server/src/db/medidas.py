@@ -34,3 +34,31 @@ class medidas():
 
     def close(self):
         self.conn.close()
+
+    def last(self):
+        self.cursor.execute('SELECT * FROM datos where time = (select max(time) from datos)')
+        tmp = self.cursor.fetchall()[0]
+        return Medida(tmp[0],tmp[1],tmp[2],tmp[3],tmp[4],tmp[5])
+
+#
+#
+#
+#
+class Medida():
+    def __init__(self,timestamp,temp,hrel,htie,luz,ultr):
+        self.timestamp = datetime.datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S.%f')
+        self.temp = float(temp)
+        self.hrel = float(hrel)
+        self.htie = float(htie)
+        self.luz  = float(luz)
+        self.ultr = float(ultr)
+        self.dict = {}
+        self.dict["time"] = self.timestamp
+        self.dict["temperatura"] = self.temp
+        self.dict["humedad_relativa"] = self.hrel
+        self.dict["humedad_tierra"] = self.htie
+        self.dict["luz"] = self.luz
+        self.dict["ultrasonido"] = self.ultr
+
+    def __getitem__(self,key):
+        return self.dict[key]
