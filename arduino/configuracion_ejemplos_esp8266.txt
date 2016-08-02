@@ -1,0 +1,22 @@
+
+#Modo estación (cliente)
+AT+CWMODE_DEF=1
+
+#Conexión a la wifi
+AT+CWJAP_DEF="SSID","PASSWORD" 
+
+#Conexión automática al iniciar
+AT+CWAUTOCONN=1 
+
+#Conexión simple
+AT+CIPMUX=0 
+
+#Comprobar IP asignada
+AT+CIFSR
+
+#Pruebas de conexión
+AT+CIPSTART="TCP","google.com",80
+AT+CIPSEND=18
+>GET / HTTP/1.0\r\n\r\n
+AT+CIPCLOSE
+
