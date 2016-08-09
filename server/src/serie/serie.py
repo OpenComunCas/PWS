@@ -18,8 +18,8 @@ TIMEOUT = 2.01
 ser = serial.Serial()
 
 def open():
-  print 'Iniciando Arduino...'
-  print 'Configurando conexión serie: \nPuerto: '+PORT+'\nBaudrate: '+str(BAUD)+'\nTimeout: '+str(TIMEOUT)
+  print('Iniciando Arduino...')
+  print('Configurando conexión serie: \nPuerto: '+PORT+'\nBaudrate: '+str(BAUD)+'\nTimeout: '+str(TIMEOUT))
   ser.port = PORT
   ser.baudrate = BAUD
   ser.timeout = TIMEOUT
