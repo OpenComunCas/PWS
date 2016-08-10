@@ -38,12 +38,18 @@ class medidas():
     def last(self):
         self.cursor.execute('SELECT * FROM datos where time = (select max(time) from datos)')
         tmp = self.cursor.fetchall()[0]
-        return Medida(tmp[0],tmp[1],tmp[2],tmp[3],tmp[4],tmp[5])
+        return to_medida(tmp)
 
 #
 #
 #
 #
+def to_db(medida):
+    return medida.to_tuple()
+
+def to_medida(tmp):
+    return Medida(tmp[0],tmp[1],tmp[2],tmp[3],tmp[4],tmp[5])
+
 class Medida():
     def __init__(self,timestamp,temp,hrel,htie,luz,ultr):
         self.timestamp = datetime.datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S.%f')
@@ -52,13 +58,12 @@ class Medida():
         self.htie = float(htie)
         self.luz  = float(luz)
         self.ultr = float(ultr)
-        self.dict = {}
-        self.dict["time"] = self.timestamp
-        self.dict["temperatura"] = self.temp
-        self.dict["humedad_relativa"] = self.hrel
-        self.dict["humedad_tierra"] = self.htie
-        self.dict["luz"] = self.luz
-        self.dict["ultrasonido"] = self.ultr
 
     def __getitem__(self,key):
-        return self.dict[key]
+        return self.to_dict()[key]
+
+    def to_tuple(self):
+        return (self.timestamp,self.temp,self.hrel,self.htie,self.luz,self.ultr)
+
+    def to_dict(self):
+        return {"time": self.timestamp,"temperatura":self.temp,"humedad_relativa":self.hrel,"humedad_tierra": self.htie,"luz":self.luz,"ultrasonido":self.ultr}

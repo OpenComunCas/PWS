@@ -27,6 +27,25 @@ class CurrentDataCommand(ICommand):
 
         return "text",retval
 
+class CurrentDataCommand(ICommand):
+    def __init__(self):
+        self.command = "/info"
+
+    def handle_message(self,message):
+        data = requests.get('http://localhost:5000/current/').json()
+        retval = 'time: ' + str(data['time']) + '\n' + \
+                     'Temperatura: ' + str(data['tmp']) + '\n' + \
+                     'Humedad Relativa: ' + str(data['hr']) + '\n' + \
+                     'Humedad en Tierra: ' + str(data['ht']) + '\n' + \
+                     'Luz: ' + str(data['luz']) + '\n' + \
+                     'Distancia: ' + str(data['distancia']) + '\n'
+
+        return "text",retval
+
+
+
+
+
 class CommandHandler():
     def __init__(self):
        self.commands = [HelloCommand(),CurrentDataCommand()]
