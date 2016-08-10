@@ -1,3 +1,5 @@
+import requests
+
 class ICommand(object):
     def can_handle(self,message):
         return message['text'].startswith(self.command)
@@ -17,7 +19,7 @@ class CurrentDataCommand(ICommand):
         self.command = "/datos"
 
     def handle_message(self,message):
-        data = requests.get('http://localhost:5000/current/').json()
+        data = requests.get('http://localhost:5000/current').json()
         retval = 'time: ' + str(data['time']) + '\n' + \
                      'Temperatura: ' + str(data['tmp']) + '\n' + \
                      'Humedad Relativa: ' + str(data['hr']) + '\n' + \
