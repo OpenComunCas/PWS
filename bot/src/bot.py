@@ -7,11 +7,11 @@ class WeatherBot():
     def __init__(self):
         with open('data.json') as data_file:    
             data = json.load(data_file)
-            self.bot = telepot.Bot(data["BOT_TOKEN"])
-            self.handle_send = {}
-            self.handle_send["text"] = self.send_text
-            self.message_dispacher = Dispacher()
-            self.bot.message_loop(self.handle_message)
+        self.bot = telepot.Bot(data["BOT_TOKEN"])
+        self.handle_send = {}
+        self.handle_send["text"] = self.send_text
+        self.message_dispacher = Dispacher()
+        self.bot.message_loop(self.handle_message)
 
     def handle_message(self,message):
         content_type, chat_type, chat_id = telepot.glance(message)
