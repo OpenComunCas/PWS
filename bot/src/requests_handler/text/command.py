@@ -7,6 +7,14 @@ class ICommand(object):
     def handle_message(message):
         pass
 
+class EchoCommand(ICommand):
+    def __init__(self):
+        self.command = "/echo"
+
+    def handle_message(self, message):
+        return "text",message['text']
+
+
 class HelloCommand(ICommand):
     def __init__(self):
         self.command = "/hello"
@@ -46,11 +54,9 @@ class CurrentDataCommand(ICommand):
 
 
 
-
-
 class CommandHandler():
     def __init__(self):
-       self.commands = [HelloCommand(),CurrentDataCommand()]
+       self.commands = [HelloCommand(),CurrentDataCommand(), EchoCommand()]
 
     def handle_message(self,message):
         for command in self.commands:
