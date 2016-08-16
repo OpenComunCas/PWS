@@ -9,19 +9,18 @@ def index(request):
 
 
 def get_all(request,id_planta,tipo):
-    return HttpResponse(serializers.serialize("json", Medida.objects.all()))
-    #medidas.append({"time":medida[0],"temperatura":medida[1],"humedad relativa":medida[2],"humedad en tierra":medida[3],"luz":medida[4],"distancia":medida[5]})
-
+    return HttpResponse(serializers.serialize("json", Medida.objects.all().filter(planta=Planta.objects.get(pk=id_planta))))
+ 
 @api_view(['GET', 'POST'])
-def current(request):
+def current(request,id_planta):
     if request.method == 'GET':
-        medida = Medida.objects.latest('id')
-        return HttpResponse(jsonify(medida))
+        medida = Medida.objects.latest('pk')
+        return HttpResponse(serializers.serialize("json",medida))
 
     if request.method == 'POST':
         data = request.body
         data=eval(data.strip().decode("UTF-8"))
-        p = Planta.objects.all()[0]
+        p = Planta.objects.get(pk=id_planta)
         m = Medida(temperatura=data['temp'], humedad_relativa=data['hrel'], humedad_tierra=data['htie'], luz=data['luz'], distancia=data['ultr'],planta=p)
         m.save()
         return HttpResponse("OOOK")
