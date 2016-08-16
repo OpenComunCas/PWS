@@ -6,7 +6,7 @@ class Planta(models.Model):
     name = models.CharField(max_length=50)
 
 class Medida(models.Model):
-    timestamp = models.DateTimeField('meassure timestamp')
+    timestamp = models.DateTimeField(auto_now_add=True)
     temperatura = models.FloatField(null=True, blank=True, default=None)
     humedad_tierra = models.FloatField(null=True, blank=True, default=None)
     humedad_relativa = models.FloatField(null=True, blank=True, default=None)
