@@ -40,7 +40,7 @@ if __name__ == '__main__':
     signal.signal(signal.SIGINT, signal_handler)
 
 
-    url = 'http://localhost:5000/current'
+    url = 'http://localhost:8000/orchard/current'
 
 
     while(True):
