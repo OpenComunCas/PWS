@@ -1,15 +1,9 @@
 from django.db import models
 
-# Create your models here.
-# especie, alarmas, usuarios,
-# celda tiene alarmas y usuario se suscribe a alarmas.
-# Especie tiene parametros.
-# Celda tiene parametros.
-# Celda tiene especie
-
 TIPO_UMBRAL = (
     ('MAX', 'Maximo'),
-    ('MIN', 'Minimo')
+    ('MIN', 'Minimo'),
+    ('MED', 'Media')
 )
 TIPO_MEDIDA = (
     ('T', 'temperatura'),
@@ -19,21 +13,47 @@ TIPO_MEDIDA = (
     ('D', 'distancia')
 )
 
+class Especie(models.Model):
+    """
+    temperatura - grados
+    """
+    name = models.CharField(max_length=50)
+
+class Parametros(models.Model):
+    tipo = models.CharField(max_length=1, choices=TIPO_MEDIDA)
+    tipo_umbral = models.CharField(max_length=3, choices=TIPO_UMBRAL)
+    valor = models.FloatField(null=True, blank=True, default=0.0)
+    especie=models.ForeignKey(Especie,on_delete=models.CASCADE)
+
+class Celda(models.Model):
+    name = models.CharField(max_length=50)
+    especie = models.ForeignKey(Especie,default=None)
+
 class Alarma(models.Model):
     tipo = models.CharField(max_length=1, choices=TIPO_MEDIDA)
     tipo_umbral = models.CharField(max_length=3, choices=TIPO_UMBRAL)
     valor = models.FloatField(null=True, blank=True, default=0.0)
 
+class AlarmaCelda(models.Model):
+    alarma=models.ForeignKey(Alarma,on_delete=models.CASCADE)
+    celda=models.ForeignKey(Celda,on_delete=models.CASCADE)
+
 class AlarmaTemporal(models.Model):
     alarma=models.ForeignKey(Alarma,on_delete=models.CASCADE)
     tiempo_minutos = models.FloatField(null=True, blank=True, default=0.0)
 
-class Especie(models.Model):
-    name = models.CharField(max_length=50)
+class Usuario(models.Model):
+    nombre = models.CharField(max_length=50)
+    telefono = models.CharField(max_length=50)
+    mail = models.CharField(max_length=50)
 
-class Celda(models.Model):
-    name = models.CharField(max_length=50)
-    especie = models.ForeignKey(Especie,default=None)
+class Suscribe(models.Model):
+    """
+    relacion - usuario  AlarmaCelda
+    para suscribir el usuario a las alarmas de una celda
+    """
+    usuario = models.ForeignKey(Usuario,on_delete=models.CASCADE)
+    alarma = models.ForeignKey(AlarmaCelda,on_delete=models.CASCADE)
 
 class Medida(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
