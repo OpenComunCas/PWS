@@ -29,6 +29,11 @@ class Celda(models.Model):
     name = models.CharField(max_length=50)
     especie = models.ForeignKey(Especie,default=None)
 
+class Arduino(models.Model):
+    celda = models.ForeignKey(Celda,default=None)
+    identificador = models.CharField(max_length=50)
+
+
 class Alarma(models.Model):
     tipo = models.CharField(max_length=1, choices=TIPO_MEDIDA)
     tipo_umbral = models.CharField(max_length=3, choices=TIPO_UMBRAL)
