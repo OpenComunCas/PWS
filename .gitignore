@@ -65,3 +65,8 @@ target/
 .ipynb_checkpoints
 #db
 *.sqlite3
+
+#Virtualenv
+bin/
+include/
+pip-selfcheck.json
