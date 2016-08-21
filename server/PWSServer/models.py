@@ -14,9 +14,6 @@ TIPO_MEDIDA = (
 )
 
 class Especie(models.Model):
-    """
-    temperatura - grados
-    """
     name = models.CharField(max_length=50)
 
 class Parametros(models.Model):
