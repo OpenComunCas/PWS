@@ -8,14 +8,14 @@ def index(request):
     return HttpResponse("Hello, world. You're at the polls index.")
 
 
-def get_all(request,id_planta,tipo):
-    return HttpResponse(serializers.serialize("json", Medida.objects.all().filter(planta=Celda.objects.get(pk=id_planta))))
+def get_all(request, id_celda, tipo):
+    return HttpResponse(serializers.serialize("json", Medida.objects.all().filter(celda=Celda.objects.get(pk=id_celda))))
 
 @api_view(['GET', 'POST'])
-def current(request,id_celda):
+def current(request, id_celda):
     if request.method == 'GET':
         medida = Medida.objects.latest('pk')
-        return HttpResponse(serializers.serialize("json",medida))
+        return HttpResponse(serializers.serialize("json",[medida]))
 
     if request.method == 'POST':
         data = request.body
