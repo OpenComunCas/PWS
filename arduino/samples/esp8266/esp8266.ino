@@ -10,17 +10,13 @@ void setup() {
  pinMode(7, OUTPUT);
 }
 
-
 void loop() {
-  
   if (esp.available()){
     c = esp.read();
     Serial.print(c);
   }
-
   if (Serial.available()){
     c = Serial.read();
     esp.print(c);
   }
-  
 }
