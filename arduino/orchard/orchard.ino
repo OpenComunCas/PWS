@@ -60,18 +60,20 @@ void loop() {
 
   if (soil <= SOIL_THRESHOLD){
     wdt_reset();
+    Serial.println("!action>");
+    Serial.println("water");
     digitalWrite(RELAYPIN, HIGH);
     digitalWrite(LEDPIN, HIGH);
     delay(1500);
     digitalWrite(LEDPIN, LOW);
     digitalWrite(RELAYPIN, LOW);
   }
-     
-  Serial.print("L:");
-  Serial.print(light);
-  Serial.print("S:");
+  Serial.println("!data>");
+  Serial.print("soil!");
   Serial.print(soil);
-  Serial.print("T:");
+  Serial.print(":light!");
+  Serial.print(light);
+  Serial.print(":temp!");
   Serial.println(temp);
   delay(200);
 
