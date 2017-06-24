@@ -1,4 +1,6 @@
-"API_KEY":{
-    WRITE_API_KEY = "WRITEAPIKEY",
-    READ_API_KEY = "READAPIKEY"
+{
+    "API_KEY":{
+        "WRITE": "WRITEAPIKEY",
+        "READ": "READAPIKEY"
+    }
 }
