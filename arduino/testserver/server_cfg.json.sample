@@ -1,5 +1,9 @@
 {
-    "API_KEY":{
+    "MEASURES_KEY":{
+        "WRITE": "WRITEAPIKEY",
+        "READ": "READAPIKEY"
+    },
+    "ACTIONS_KEY":{
         "WRITE": "WRITEAPIKEY",
         "READ": "READAPIKEY"
     }
