@@ -23,10 +23,6 @@ class Application(tornado.web.Application):
         }
         tornado.web.Application.__init__(self, handlers, **settings)        
 
-
-def init_database():
-    sampleDAO.Sample.createTable(ifNotExists=True)
-
 if __name__ == '__main__':
     
     #init storage
