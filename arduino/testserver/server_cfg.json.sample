@@ -1,6 +1,0 @@
-{
-    "API_KEY":{
-        "WRITE": "WRITEAPIKEY",
-        "READ": "READAPIKEY"
-    }
-}
