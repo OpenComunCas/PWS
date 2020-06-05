@@ -1,6 +1,6 @@
 aiohttp==0.22.5
 chardet==2.3.0
-Django==1.10
+Django==1.11.29
 djangorestframework==3.4.5
 multidict==1.2.2
 requests==2.11.1
